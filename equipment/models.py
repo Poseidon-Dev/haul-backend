@@ -74,6 +74,7 @@ class Equipment(models.Model):
         null=False,
         default=0,
     )
+    trackit_id = models.IntegerField()
 
     @property
     def company(self):

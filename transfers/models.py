@@ -10,13 +10,29 @@ class Transfers(models.Model):
         on_delete=models.DO_NOTHING,
         primary_key=True,
     )
+    from_company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name='transfers_from_company',
+    )
+    from_division = models.ForeignKey(
+        Division,
+        on_delete=models.CASCADE,
+        related_name='transfers_from_division',
+    )
+    from_status = models.IntegerField(
+        blank=True,
+        null=True,
+    )
     to_company = models.ForeignKey(
         Company,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='transfers_to_company',
     )
     to_division = models.ForeignKey(
         Division,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='transfers_to_division',
     )
     to_status = models.IntegerField(
         blank=True,
@@ -49,18 +65,37 @@ class Transfers(models.Model):
 
 
 class TransferHistory(models.Model):
+    transfer_history_id = models.AutoField(
+        primary_key=True
+        )
     equipment_id = models.OneToOneField(
         Equipment,
         on_delete=models.DO_NOTHING,
-        primary_key=True,
+        primary_key=False,
+    )
+    from_company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name='transfer_history_from_company',
+    )
+    from_division = models.ForeignKey(
+        Division,
+        on_delete=models.CASCADE,
+        related_name='transfer_history_from_division',
+    )
+    from_status = models.IntegerField(
+        blank=True,
+        null=True,
     )
     to_company = models.ForeignKey(
         Company,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='transfer_history_to_company',
     )
     to_division = models.ForeignKey(
         Division,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='transfer_history_to_division',
     )
     to_status = models.IntegerField(
         blank=True,

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'profiles',
     'equipment',
     'transfers',
+    # 'locations',
 
     'rest_framework',
     'corsheaders',
